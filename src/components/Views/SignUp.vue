@@ -16,12 +16,7 @@
           <label for="username" class="label--global">اسم المستخدم:</label>
         </div>
         <div class="field">
-          <input
-            id="email"
-            v-model.lazy="email"
-            required
-            class="text--global"
-          />
+          <input id="email" v-model="email" required class="text--global" />
           <label for="email" class="label--global">البريد الإلكتروني:</label>
           <p v-if="email !== '' && !isEmailValid" class="invalid">
             البريد الإلكتروني غير صحيح
@@ -31,7 +26,7 @@
           <input
             type="tel"
             id="phone"
-            v-model.lazy="phone"
+            v-model="phone"
             required
             class="text--global"
           />
@@ -68,6 +63,10 @@
         </div>
         <button type="submit" class="btn--global">إنشاء حساب</button>
       </form>
+      <div class="create--account--container">
+        <span class="create--account--message"> لديك حساب بالفعل؟</span>
+        <router-link to="/login" class="btn--light"> سجل الدخول </router-link>
+      </div>
     </section>
   </div>
 </template>
@@ -119,7 +118,12 @@ export default {
           password: this.password,
         });
         console.log(result);
-        // Redirect to success page
+
+        // Redirect to verify account page
+        this.$router.push({
+          name: "VerifyAccount",
+          props: { phone: this.phone },
+        });
       } catch (error) {
         this.error = error.response.data.message;
       }

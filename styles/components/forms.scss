@@ -12,9 +12,11 @@
 
   .form--content {
     background-color: #fff;
-    padding: 4rem;
+    padding: 2rem 4rem;
     border-radius: 2rem;
     color: $primaryGray;
+    font-size: $smallFont;
+
     h1 {
       line-height: $HeadLineSpacing;
       font-size: $HeadFont;
@@ -39,7 +41,7 @@
         &:valid,
         &:not(:empty) {
           & ~ label {
-            top: -5px;
+            top: -2rem;
           }
         }
       }

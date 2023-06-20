@@ -9,4 +9,9 @@ body {
     border-radius: 3.5rem;
     font-size: $smallFont;
   }
+  .btn--light {
+    color: $primary;
+    margin: 2rem 0;
+    font-size: $smallFont;
+  }
 }
