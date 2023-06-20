@@ -23,7 +23,7 @@
             class="text--global"
           />
           <label for="email" class="label--global">البريد الإلكتروني:</label>
-          <p v-if="email.$dirty && !isEmailValid" style="color: red">
+          <p v-if="email !== '' && !isEmailValid" class="invalid">
             البريد الإلكتروني غير صحيح
           </p>
         </div>
@@ -36,7 +36,7 @@
             class="text--global"
           />
           <label for="phone" class="label--global">رقم الهاتف:</label>
-          <p v-if="phone.$dirty && !isPhoneValid" style="color: red">
+          <p v-if="phone !== '' && !isPhoneValid" class="invalid">
             رقم الهاتف غير صحيح
           </p>
         </div>
@@ -61,9 +61,10 @@
           <label for="confirm-password" class="label--global"
             >تأكيد كلمة المرور:</label
           >
-          <p v-if="!isPasswordConfirmed" style="color: red">
+          <p v-if="!isPasswordConfirmed" class="invalid">
             كلمة المرور غير متطابقة
           </p>
+          <p class="invalid">{{ this.error }}</p>
         </div>
         <button type="submit" class="btn--global">إنشاء حساب</button>
       </form>
@@ -83,6 +84,7 @@ export default {
       phone: "",
       password: "",
       confirmPassword: "",
+      error: "",
     };
   },
   computed: {
@@ -119,8 +121,7 @@ export default {
         console.log(result);
         // Redirect to success page
       } catch (error) {
-        console.error(error);
-        // Handle error
+        this.error = error.response.data.message;
       }
     },
   },
