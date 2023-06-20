@@ -1,0 +1,57 @@
+@import "../abstracts/mixins.scss";
+@import "../abstracts/variables.scss";
+
+.form--content,
+.form--container {
+  @include flexCenter;
+  flex-direction: column;
+}
+
+.form--container {
+  min-height: 100vh;
+
+  .form--content {
+    background-color: #fff;
+    padding: 4rem;
+    border-radius: 2rem;
+    color: $primaryGray;
+    h1 {
+      line-height: $HeadLineSpacing;
+      font-size: $HeadFont;
+      color: $primaryBlack;
+    }
+    h2 {
+      font-size: $MediumFont;
+      margin-bottom: 4rem;
+    }
+    .field {
+      position: relative;
+      margin: 2rem 0;
+      label {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        transition: 0.5s;
+      }
+      input {
+        &:focus,
+        &:valid,
+        &:not(:empty) {
+          & ~ label {
+            top: -5px;
+          }
+        }
+      }
+    }
+  }
+
+  form {
+    @include flexCenter;
+    flex-direction: column;
+  }
+
+  p {
+    margin-top: 0.5rem;
+  }
+}

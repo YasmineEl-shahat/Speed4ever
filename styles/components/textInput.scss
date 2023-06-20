@@ -1,0 +1,22 @@
+@import "../abstracts/variables.scss";
+@import "../abstracts/mixins.scss";
+
+.text--global {
+  width: 35vw;
+  font-size: $MediumFont;
+
+  @include placeholder-color($primaryGray);
+  color: $primaryBlack;
+  border-radius: 6px;
+  height: 3.5rem;
+
+  border-bottom: 2px solid #f3f3f3;
+  padding: 0rem 1.2rem;
+
+  @include mQ(562px) {
+    width: 80vw;
+  }
+  @include mQ(500px) {
+    width: 90vw;
+  }
+}
