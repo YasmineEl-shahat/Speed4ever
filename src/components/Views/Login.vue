@@ -63,11 +63,13 @@ export default {
           password: this.password,
         });
         console.log(result);
-        await cookieCutter.set("auth", result.data.token);
+        cookieCutter.set("auth", result.data.token);
         localStorage.setItem("user_id", result.data.id);
 
         // Redirect to home page after successful login
-        this.$router.push({ name: "Home" });
+
+        // this.$router.push({ name: "Home" });
+        window.location.assign("/");
       } catch (error) {
         this.error = error.response.data.message;
       }

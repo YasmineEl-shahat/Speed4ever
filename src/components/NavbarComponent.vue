@@ -1,52 +1,53 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="mainContainer">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#"> إضافة إعلان</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">اتصل بنا</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">الباقات</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">العروض</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">من نحن</a>
+          </li>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#"
-            >الرئيسية <span class="sr-only">(current)</span></a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">من نحن</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">العروض</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">الباقات</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">اتصل بنا</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">إضافة اعلان</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input
-          class="form-control mr-sm-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-          Search
-        </button>
-      </form>
+          <li class="nav-item">
+            <a class="nav-link active">الرئيسية</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </form>
+      </div>
     </div>
   </nav>
 </template>
+<script>
+import "bootstrap/dist/css/bootstrap.css";
+import Popper from "popper.js";
+window.Popper = Popper;
+import "bootstrap/dist/js/bootstrap.js";
+import "../../node_modules/@fortawesome/fontawesome-free/css/all.css";
+export default {
+  name: "NavbarComponent",
+};
+</script>

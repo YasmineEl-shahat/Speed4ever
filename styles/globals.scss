@@ -8,6 +8,8 @@
 @import "./components/textInput.scss";
 @import "./components/radio.scss";
 @import "./components/forms.scss";
+@import "./Layout/Navbar.scss";
+@import "./Layout/Footer.scss";
 
 * {
   box-sizing: border-box;
@@ -62,11 +64,17 @@ html {
       color: red;
     }
     .mainContainer {
-      margin-left: 25.1rem;
-      padding: 3rem 5rem;
-
-      @include mQ(500px) {
-        padding: 2rem;
+      width: 82.39%;
+      margin: auto;
+    }
+    @include mQ(1300px) {
+      .mainContainer {
+        width: 88.39%;
+      }
+    }
+    @include mQ(992px) {
+      .mainContainer {
+        width: 90%;
       }
     }
     ul {

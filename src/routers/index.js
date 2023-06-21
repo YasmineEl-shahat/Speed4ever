@@ -1,11 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import App from "../App.vue";
 import UnderConstructionComponent from "../components/Views/UnderConstructionComponent.vue";
 import SignUp from "../components/Views/SignUp.vue";
 import VerifyAccount from "../components/Views/VerifyAccount.vue";
 import ForgetPassword from "../components/Views/ForgetPassword.vue";
 import ResetPassword from "../components/Views/ResetPassword.vue";
+import HomeComponent from "../components/Views/HomeComponent.vue";
 import LoginComponent from "../components/Views/Login.vue";
 
 import { useAuthStore } from "@/stores/auth";
@@ -29,7 +29,7 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: App,
+    component: HomeComponent,
     beforeEnter: authGuard,
   },
   {
