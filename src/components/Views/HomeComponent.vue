@@ -2,6 +2,7 @@
   <NavbarComponent />
   <main class="mainContainer">
     <div id="slider" class="carousel slide" data-bs-ride="carousel">
+      <!-- Carousel indicators -->
       <ol class="carousel-indicators">
         <li
           v-for="(slide, index) in slider"
@@ -11,6 +12,8 @@
           :class="{ active: index === 0 }"
         ></li>
       </ol>
+
+      <!-- Carousel slides -->
       <div class="carousel-inner">
         <div
           v-for="(slide, index) in slider"
@@ -26,6 +29,8 @@
           </a>
         </div>
       </div>
+
+      <!-- Carousel controls -->
       <a
         class="carousel-control-prev"
         href="#slider"
@@ -45,6 +50,29 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
+
+    <!-- Categories -->
+    <div class="row mt-5">
+      <div
+        v-for="category in categories"
+        :key="category.id"
+        class="col-md-4 mb-4"
+      >
+        <div class="card">
+          <img
+            :src="category.image"
+            class="card-img-top"
+            alt="Category Image"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ category.name }}</h5>
+            <a :href="'/category/' + category.id" class="btn btn-primary"
+              >View Products</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
   <FooterComponent />
 </template>
@@ -58,13 +86,22 @@ export default {
   name: "HomeComponent",
   components: { NavbarComponent, FooterComponent },
   data() {
-    return { slider: [], error: "" };
+    return {
+      slider: [],
+      categories: [],
+      latest_auctions: [],
+      latest_products: [],
+      error: "",
+    };
   },
   async created() {
     try {
       const result = await getHome();
-      console.log(result.data.data);
       this.slider = result.data.data.slider;
+      this.categories = result.data.data.categories;
+      this.latest_auctions = result.data.data.latest_auctions;
+      this.latest_products = result.data.data.latest_products;
+      console.log(result.data.data);
     } catch (error) {
       this.error = error.response.data.message;
     }
@@ -76,5 +113,21 @@ export default {
 <style>
 .carousel-inner {
   max-height: 50vh;
+}
+
+.carousel-indicators li {
+  background-color: #ccc;
+  border: none;
+  height: 12px;
+  width: 12px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.card-img-top {
+  height: 35rem;
+}
+.card {
+  border-radius: 2rem;
 }
 </style>
