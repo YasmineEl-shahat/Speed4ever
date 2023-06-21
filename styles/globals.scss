@@ -30,6 +30,10 @@ html {
     background-color: $secondary;
     color: $primaryBlack;
 
+    main.mainContainer {
+      min-height: 55.5vh;
+    }
+
     &::-webkit-scrollbar {
       width: 0.5rem;
     }
