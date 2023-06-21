@@ -73,6 +73,63 @@
         </div>
       </div>
     </div>
+
+    <h2>احدث المزادات</h2>
+    <div id="slider" class="carousel slide" data-bs-ride="carousel">
+      <!-- Carousel indicators -->
+      <ol class="carousel-indicators">
+        <li
+          v-for="(slide, index) in latest_products"
+          :key="index"
+          :data-bs-target="'#slider'"
+          :data-bs-slide-to="index"
+          :class="{ active: index === 0 }"
+        ></li>
+      </ol>
+
+      <!-- Carousel items -->
+      <div class="carousel-inner">
+        <div
+          class="carousel-item"
+          v-for="(product, index) in latest_products"
+          :key="product.id"
+          :class="{ active: index === 0 }"
+        >
+          <div class="d-flex justify-content-around">
+            <div class="card" style="width: 18rem">
+              <img :src="product.main_image" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.product_price }}</p>
+                <!-- Add your share icon and favourite button here -->
+              </div>
+            </div>
+            <!-- Add more cards here if you want to show more than one card per slide -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Carousel controls -->
+      <a
+        class="carousel-control-prev"
+        href="#slider"
+        role="button"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </a>
+      <a
+        class="carousel-control-next"
+        href="#slider"
+        role="button"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </a>
+    </div>
+    <a href="/all-products">عرض الكل</a>
   </main>
   <FooterComponent />
 </template>
