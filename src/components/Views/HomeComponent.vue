@@ -74,62 +74,55 @@
       </div>
     </div>
 
-    <h2>احدث المزادات</h2>
-    <div id="slider" class="carousel slide" data-bs-ride="carousel">
-      <!-- Carousel indicators -->
-      <ol class="carousel-indicators">
-        <li
-          v-for="(slide, index) in latest_products"
-          :key="index"
-          :data-bs-target="'#slider'"
-          :data-bs-slide-to="index"
-          :class="{ active: index === 0 }"
-        ></li>
-      </ol>
-
-      <!-- Carousel items -->
-      <div class="carousel-inner">
-        <div
-          class="carousel-item"
-          v-for="(product, index) in latest_products"
-          :key="product.id"
-          :class="{ active: index === 0 }"
-        >
-          <div class="d-flex justify-content-around">
-            <div class="card" style="width: 18rem">
-              <img :src="product.main_image" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">{{ product.product_price }}</p>
-                <!-- Add your share icon and favourite button here -->
-              </div>
+    <!-- Latest Auctions -->
+    <div class="slider-container">
+      <h3 v-if="latest_auctions.length > 0" class="slider-title">
+        احدث المزادات
+      </h3>
+      <div class="card-slider">
+        <div class="card" v-for="auction in latest_auctions" :key="auction.id">
+          <img :src="auction.image" class="card-img-top" alt="Auction Image" />
+          <div class="card-body">
+            <h5 class="card-title">{{ auction.name }}</h5>
+            <div class="price-share-container">
+              <p class="price">{{ auction.price }}</p>
+              <i class="fas fa-share"></i>
+              <button class="btn-favorite">
+                <i class="fas fa-heart"></i>
+              </button>
             </div>
-            <!-- Add more cards here if you want to show more than one card per slide -->
           </div>
         </div>
       </div>
-
-      <!-- Carousel controls -->
-      <a
-        class="carousel-control-prev"
-        href="#slider"
-        role="button"
-        data-bs-slide="prev"
+      <a v-if="latest_auctions.length > 0" href="#" class="view-all-link"
+        >عرض الكل</a
       >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </a>
-      <a
-        class="carousel-control-next"
-        href="#slider"
-        role="button"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </a>
     </div>
-    <a href="/all-products">عرض الكل</a>
+
+    <!-- Latest Products -->
+    <div class="slider-container">
+      <h3 class="slider-title">احدث المنتجات</h3>
+      <div class="card-slider">
+        <div class="card" v-for="product in latest_products" :key="product.id">
+          <img
+            :src="product.main_image"
+            class="card-img-top"
+            alt="Product Image"
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <div class="price-share-container">
+              <p class="price">{{ product.product_price }}</p>
+              <i class="fas fa-share"></i>
+              <button class="btn-favorite">
+                <i class="fas fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="view-all-link">عرض الكل</a>
+    </div>
   </main>
   <FooterComponent />
 </template>
@@ -142,6 +135,7 @@ import { getHome } from "../../../api/home";
 export default {
   name: "HomeComponent",
   components: { NavbarComponent, FooterComponent },
+
   data() {
     return {
       slider: [],
@@ -168,6 +162,12 @@ export default {
 </script>
 
 <style>
+.swiper-slide {
+  width: 300px;
+}
+.card {
+  border-radius: 10px;
+}
 .carousel-inner {
   max-height: 50vh;
 }
@@ -186,5 +186,60 @@ export default {
 }
 .card {
   border-radius: 2rem;
+}
+
+.slider-container {
+  margin-bottom: 2rem;
+}
+
+.slider-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.slider-container .card-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Remove scrollbar */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-color: transparent;
+  scroll-behavior: smooth;
+}
+
+.slider-container .card-slider::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* Remove scrollbar background */
+}
+
+.slider-container .card {
+  flex: 0 0 auto;
+  width: 18rem;
+  margin-right: 1rem;
+  scroll-snap-align: start;
+  border-radius: 1rem;
+}
+
+.slider-container .card-img-top {
+  height: 15rem;
+  object-fit: cover;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.slider-container .card-body {
+  padding: 1rem;
+}
+
+.slider-container .card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.slider-container .price-share-container {
+  display: flex;
+  align-items: center;
 }
 </style>
