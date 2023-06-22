@@ -269,10 +269,17 @@ export default {
           currentPosition = event.clientX;
         }
 
-        currentTranslate = prevTranslate + currentPosition - startPosition;
+        const dragDistance = currentPosition - startPosition;
+        currentTranslate = prevTranslate + dragDistance;
 
-        // Apply the translation to the slider element
-        slider.style.transform = `translateX(${currentTranslate}px)`;
+        // Apply the translation to each card within the slider
+        const cards = slider.querySelectorAll(".card");
+        const cardWidth = cards[0].offsetWidth; // Assuming all cards have the same width
+
+        cards.forEach((card, index) => {
+          const cardTranslate = dragDistance - index * cardWidth;
+          card.style.transform = `translateX(${cardTranslate}px)`;
+        });
       }
 
       function stopDragging() {
