@@ -109,10 +109,12 @@
             <h5 class="card-title">{{ auction.name }}</h5>
             <div class="price-share-container">
               <p class="price">{{ auction.price }}</p>
-              <i class="fas fa-share"></i>
-              <button class="btn-favorite">
-                <i class="fas fa-heart"></i>
-              </button>
+              <div>
+                <i class="fas fa-share"></i>
+                <button class="btn-favorite">
+                  <i class="fas fa-heart"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -136,10 +138,12 @@
             <h5 class="card-title">{{ product.name }}</h5>
             <div class="price-share-container">
               <p class="price">{{ product.product_price }}</p>
-              <i class="fas fa-share"></i>
-              <button class="btn-favorite">
-                <i class="fas fa-heart"></i>
-              </button>
+              <div>
+                <i class="fas fa-share-nodes"></i>
+                <button class="btn-favorite">
+                  <i class="fas fa-heart"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -325,5 +329,15 @@ export default {
 .slider-container .price-share-container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+.slider-container .price-share-container button {
+  margin-right: 1rem;
+}
+.view-all-link {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
 }
 </style>
