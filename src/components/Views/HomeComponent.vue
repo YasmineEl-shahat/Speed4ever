@@ -111,7 +111,11 @@
               <p class="price">{{ auction.price }}</p>
               <div>
                 <i class="fas fa-share"></i>
-                <button class="btn-favorite">
+                <button
+                  class="btn-favorite"
+                  @click="addToFavorite(auction.id, $event)"
+                  :class="{ active: isProductFavorite(product.id) }"
+                >
                   <i class="fas fa-heart"></i>
                 </button>
               </div>
@@ -147,7 +151,11 @@
               <p class="price">{{ product.product_price }}</p>
               <div>
                 <i class="fas fa-share-nodes"></i>
-                <button class="btn-favorite">
+                <button
+                  @click="addToFavorite(product.id, $event)"
+                  class="btn-favorite"
+                  :class="{ active: isProductFavorite(product.id) }"
+                >
                   <i class="fas fa-heart"></i>
                 </button>
               </div>
@@ -165,6 +173,7 @@
 import NavbarComponent from "../NavbarComponent.vue";
 import FooterComponent from "../FooterComponent.vue";
 import { getHome } from "../../../api/home";
+import { addToFav, getMyFav } from "../../../api/favorite";
 
 export default {
   name: "HomeComponent",
@@ -176,6 +185,7 @@ export default {
       categories: [],
       latest_auctions: [],
       latest_products: [],
+      favoriteProducts: [],
       error: "",
     };
   },
@@ -188,12 +198,38 @@ export default {
       this.latest_products = result.data.data.latest_products;
       this.initializeSlider("auctionSlider"); // Initialize the auction slider
       this.initializeSlider("productSlider"); // Initialize the product slider
+      // Fetch the user's favorite products
+      const favoriteResponse = await getMyFav();
+      this.favoriteProducts = favoriteResponse.data.data;
     } catch (error) {
       this.error = error.response.data.message;
     }
   },
 
   methods: {
+    isProductFavorite(productId) {
+      return this.favoriteProducts.some((product) => product.id === productId);
+    },
+    addToFavorite(itemId, e) {
+      const button = e.target;
+      if (
+        button.classList.contains("active") ||
+        button.parentElement.classList.contains("active")
+      ) {
+        button.classList.remove("active");
+        button.parentElement.classList.remove("active");
+      } else button.classList.add("active");
+      addToFav({ product_id: itemId })
+        .then(() => {
+          // Handle success, e.g., show a success message
+          console.log("Item added to favorites");
+        })
+        .catch((error) => {
+          // Handle error, e.g., show an error message
+          console.error("Failed to add item to favorites:", error);
+        });
+    },
+
     initializeSlider(refName) {
       const slider = this.$refs[refName]; // Get the slider element using the provided refName
       if (!slider) return; // Return if the slider element is null
@@ -246,6 +282,11 @@ export default {
 </script>
 
 <style>
+.btn-favorite.active,
+.fa-heart.active {
+  color: red;
+}
+
 .ad-section {
   position: relative;
 }
