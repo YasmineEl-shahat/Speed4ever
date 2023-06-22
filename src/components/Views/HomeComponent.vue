@@ -124,6 +124,13 @@
       >
     </section>
 
+    <section class="ad-section">
+      <a href="#">Shop now</a>
+      <img
+        src="https://media.istockphoto.com/id/998851134/photo/speak-up-in-the-name-of-justice.jpg?s=612x612&w=0&k=20&c=5J3HffZhwosheLR9lsOk7r8vUaPOG_uEbnmes1kC5wE="
+      />
+    </section>
+
     <!-- Latest Products -->
     <section class="slider-container">
       <h3 class="slider-title">احدث المنتجات</h3>
@@ -239,6 +246,23 @@ export default {
 </script>
 
 <style>
+.ad-section {
+  position: relative;
+}
+.ad-section img {
+  width: 100%;
+  height: 30rem;
+}
+.ad-section a {
+  color: #fff;
+  position: absolute;
+  top: 15rem;
+  right: 7vw;
+  font-size: 2rem;
+}
+.ad-section a:hover {
+  color: #fff;
+}
 .about-us {
   font-size: 2rem;
   margin: 4rem 0;
@@ -277,7 +301,7 @@ export default {
 }
 
 .slider-container {
-  margin-bottom: 2rem;
+  margin: 4rem 0;
 }
 
 .slider-title {
