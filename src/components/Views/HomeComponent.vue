@@ -79,7 +79,7 @@
       <h3 v-if="latest_auctions.length > 0" class="slider-title">
         احدث المزادات
       </h3>
-      <div class="card-slider">
+      <div class="card-slider" ref="auctionSlider">
         <div class="card" v-for="auction in latest_auctions" :key="auction.id">
           <img :src="auction.image" class="card-img-top" alt="Auction Image" />
           <div class="card-body">
@@ -102,7 +102,7 @@
     <!-- Latest Products -->
     <div class="slider-container">
       <h3 class="slider-title">احدث المنتجات</h3>
-      <div class="card-slider">
+      <div class="card-slider" ref="productSlider">
         <div class="card" v-for="product in latest_products" :key="product.id">
           <img
             :src="product.main_image"
@@ -152,12 +152,62 @@ export default {
       this.categories = result.data.data.categories;
       this.latest_auctions = result.data.data.latest_auctions;
       this.latest_products = result.data.data.latest_products;
-      console.log(result.data.data);
+      this.initializeSlider("auctionSlider"); // Initialize the auction slider
+      this.initializeSlider("productSlider"); // Initialize the product slider
     } catch (error) {
       this.error = error.response.data.message;
     }
   },
-  methods: {},
+
+  methods: {
+    initializeSlider(refName) {
+      const slider = this.$refs[refName]; // Get the slider element using the provided refName
+      if (!slider) return; // Return if the slider element is null
+
+      let isDragging = false;
+      let startPosition = 0;
+      let currentTranslate = 0;
+      let prevTranslate = 0;
+
+      slider.addEventListener("mousedown", startDragging);
+      slider.addEventListener("touchstart", startDragging);
+      slider.addEventListener("mouseup", stopDragging);
+      slider.addEventListener("touchend", stopDragging);
+      slider.addEventListener("mouseleave", stopDragging);
+      slider.addEventListener("mousemove", drag);
+      slider.addEventListener("touchmove", drag);
+
+      function startDragging(event) {
+        if (event.type === "touchstart") {
+          startPosition = event.touches[0].clientX;
+        } else {
+          startPosition = event.clientX;
+          slider.classList.add("grabbing");
+        }
+        isDragging = true;
+      }
+
+      function drag(event) {
+        if (!isDragging) return;
+        event.preventDefault();
+
+        let currentPosition = 0;
+        if (event.type === "touchmove") {
+          currentPosition = event.touches[0].clientX;
+        } else {
+          currentPosition = event.clientX;
+        }
+
+        currentTranslate = prevTranslate + currentPosition - startPosition;
+      }
+
+      function stopDragging() {
+        slider.classList.remove("grabbing");
+        prevTranslate = currentTranslate;
+        isDragging = false;
+      }
+    },
+  },
 };
 </script>
 
