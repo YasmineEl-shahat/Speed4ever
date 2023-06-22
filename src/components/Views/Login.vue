@@ -62,9 +62,10 @@ export default {
           username: this.username,
           password: this.password,
         });
-        console.log(result);
+
         cookieCutter.set("auth", result.data.token);
         localStorage.setItem("user_id", result.data.id);
+        localStorage.setItem("username", result.data.username);
 
         // Redirect to home page after successful login
 

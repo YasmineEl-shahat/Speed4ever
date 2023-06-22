@@ -16,6 +16,7 @@ export const useAuthStore = defineStore({
   state: () => ({
     accessToken: cookieCutter.get("auth"),
     user_id: localStorage.getItem("user_id"),
+    username: localStorage.getItem("username"),
   }),
   getters: {
     isAuthenticated: (state) => state.accessToken,
@@ -61,7 +62,11 @@ export const useAuthStore = defineStore({
     },
 
     async logout() {
-      const response = await logOut();
+      const response = await logOut({
+        device_token:
+          "fDx-Ei9JAqw:APA91bGXMYyQnQWVI5Fhacc30qNAfx5Ev4tYp7_8hbUQCi8h55LL4aEVbTAKZ4FMEFq79OCykOrcauufdo7DLtiE-Mqi8_jWlZDCHBEQZ41QIJXa0mFPVWQmttgWKn6TnWpJg71X_zcW",
+        type: "ios",
+      });
       return response.data;
     },
 
