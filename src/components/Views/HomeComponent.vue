@@ -277,7 +277,7 @@ export default {
         const cardWidth = cards[0].offsetWidth; // Assuming all cards have the same width
 
         cards.forEach((card, index) => {
-          const cardTranslate = dragDistance - index * cardWidth;
+          const cardTranslate = currentTranslate - index * cardWidth;
           card.style.transform = `translateX(${cardTranslate}px)`;
         });
       }
