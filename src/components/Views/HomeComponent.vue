@@ -248,6 +248,7 @@ export default {
       slider.addEventListener("touchmove", drag);
 
       function startDragging(event) {
+        event.preventDefault();
         if (event.type === "touchstart") {
           startPosition = event.touches[0].clientX;
         } else {
@@ -258,8 +259,8 @@ export default {
       }
 
       function drag(event) {
-        if (!isDragging) return;
         event.preventDefault();
+        if (!isDragging) return;
 
         let currentPosition = 0;
         if (event.type === "touchmove") {
@@ -269,6 +270,9 @@ export default {
         }
 
         currentTranslate = prevTranslate + currentPosition - startPosition;
+
+        // Apply the translation to the slider element
+        slider.style.transform = `translateX(${currentTranslate}px)`;
       }
 
       function stopDragging() {
