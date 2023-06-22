@@ -51,8 +51,31 @@
       </a>
     </div>
 
+    <section class="about-us row">
+      <div class="col-md-6">
+        <h2>معلومات عنا</h2>
+        <p>
+          شركة ونهتم بتوفير أفضل خدماتنا لجميع العملاء. نسعى دائمًا لتحقيق الرضا
+          التام لدى عملائنا في المقام الأول. تأسست الشركة عام xxxx من قبل المؤسس
+          الذي كان لديه رؤية واضحة في تقديم خدماتنا بأفضل جودة ممكنة وبأسعار
+          منافسة. رؤيتنا على سعينا الدائم لتحقيق التميز في الخدمات التي نقدمها،
+          مع التزامنا بالمعايير والمواصفات العالمية. نسعى لتطوير أدائنا وخبراتنا
+          باستمرار، حتى نتمكن من تلبية احتياجات عملائنا بشكل أفضل. تتلخص رسالتنا
+          في تقديم أفضل الخدمات والمنتجات بأعلى مستويات الجودة، وتحقيق الرضا
+          التام لدى عملائنا. نسعى دائمًا للتطور والابتكار، لتلبية طموحات عملائنا
+          وتوسيع قاعدتنا العملائية. إننا فخورون بفريق العمل المتميز والمحترف
+          لدينا، الذي يضع تحقيق رضا عملائنا في المقام الأول دائمًا.
+        </p>
+      </div>
+      <div class="col-md-6">
+        <img
+          alt="about"
+          src="https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80"
+        />
+      </div>
+    </section>
     <!-- Categories -->
-    <div class="row mt-5">
+    <section class="row mt-5">
       <div
         v-for="category in categories"
         :key="category.id"
@@ -72,10 +95,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Latest Auctions -->
-    <div class="slider-container">
+    <section class="slider-container">
       <h3 v-if="latest_auctions.length > 0" class="slider-title">
         احدث المزادات
       </h3>
@@ -97,10 +120,10 @@
       <a v-if="latest_auctions.length > 0" href="#" class="view-all-link"
         >عرض الكل</a
       >
-    </div>
+    </section>
 
     <!-- Latest Products -->
-    <div class="slider-container">
+    <section class="slider-container">
       <h3 class="slider-title">احدث المنتجات</h3>
       <div class="card-slider" ref="productSlider">
         <div class="card" v-for="product in latest_products" :key="product.id">
@@ -122,7 +145,7 @@
         </div>
       </div>
       <a href="#" class="view-all-link">عرض الكل</a>
-    </div>
+    </section>
   </main>
   <FooterComponent />
 </template>
@@ -212,6 +235,17 @@ export default {
 </script>
 
 <style>
+.about-us {
+  font-size: 2rem;
+  margin: 4rem 0;
+}
+.about-us h2 {
+  font-size: 3rem;
+  line-height: 5rem;
+}
+.about-us img {
+  width: 100%;
+}
 .swiper-slide {
   width: 300px;
 }
